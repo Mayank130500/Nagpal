@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Do you love me?</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      img {
+        width: 350px;
+      }
+      .buttones {
+        width: 100%;
+        text-align: center;
+      }
+      .btn {
+        display: inline-block;
+      }
+      h2 {
+        color: white;
+        font-size: 18px;
+
+        padding-top: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="app"
+      class="center-screen"
+      style="display: flex; flex-direction: column"
+    >
+      <img
+        src="https://i.postimg.cc/pLJtTFgK/cute-love-bear-roses-ou7zho5oosxnpo6k.gif"
+        alt=""
+      />
+      <h1>Will You Be My Valentine?</h1>
+      <div class="buttones">
+        <button
+          type="button"
+          class="btn btn-success mr-2"
+          :style="{ fontSize: yesButtonSize + 'rem' }"
+          :key="yesButtonSize"
+          @click="yesButton"
+        >
+          Yes
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          @click="changeText('noButton')"
+        >
+          <h2 @click="changeText('heading') ">{{ currentHeaderText }}</h2>
+        </button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          headerText: [
+            "No",
+            "Are you Sure?",
+            "Really Sure?",
+            "Think Again..",
+            "Last Chance!",
+            "Surely not?",
+            "You Might Regret this?",
+            "Give it another thought!",
+            "This Could be a mistake!",
+            "Don't be so cold",
+            "Wouldn't you reconsider?",
+            "Is that your Final answer?",
+            "You're breaking my heart :(",
+          ],
+          confirmationMessages: [
+            "Are you sure?",
+            "Are you sure you don't like me?",
+            "Are you absolutely certain?",
+            // Add more confirmation messages as needed
+          ],
+          currentHeaderTextIndex: 0,
+          currentConfirmationIndex: 0,
+          yesButtonSize: 1,
+        },
+        methods: {
+          changeText(button) {
+            if (button === "noButton") {
+              this.currentHeaderTextIndex =
+                (this.currentHeaderTextIndex + 1) % this.headerText.length;
+              this.currentConfirmationIndex =
+                (this.currentConfirmationIndex + 1) %
+                this.confirmationMessages.length;
+              this.yesButtonSize += 5;
+            }
+          },
+          yesButton() {
+            window.location.href = "yes.html";
+          },
+        },
+        computed: {
+          currentHeaderText() {
+            return this.headerText[this.currentHeaderTextIndex];
+          },
+          currentConfirmationText() {
+            return this.confirmationMessages[this.currentConfirmationIndex];
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
